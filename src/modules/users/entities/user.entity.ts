@@ -1,6 +1,7 @@
 import type { TAddress, TAccount, TContact, TIdentifier, TPerson } from "../interfaces/user.type.ts";
 import type { betterReadonly } from "../../../shared/interfaces/readonly.type.ts";
 import * as tools from "../utils/validate.util.ts";
+import { ErrorHelper } from "../../../shared/utils/error.ts";
 
 export default class User{
 
@@ -36,7 +37,7 @@ export default class User{
 
   public getUniqueId(): Readonly<string> {
     if (!this._id) {
-      throw new Error("ID not set. Cannot get ID.");
+      throw new ErrorHelper(400, "teste", ['ID']);
     }
     return this._id.uuid as Readonly<string>;
   };

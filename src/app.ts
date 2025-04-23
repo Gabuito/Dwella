@@ -2,6 +2,7 @@ import Express, { type Request, type Response, type Application} from 'express';
 import subdomain from 'express-subdomain';
 import { rateLimit } from 'express-rate-limit';
 import {api,utils} from './global.routes.ts';
+import { catchError, errorHandler } from './shared/middlewares/exception.middleware.ts';
 
 // Instance of the ExpressJS application
 const app: Application = Express();
@@ -27,15 +28,17 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Subdomain routes configuration
-app.use(subdomain('api', api));
+app.use(subdomain('api', catchError(api)));
 //app.use(subdomain('docs', docs));
 //app.use(subdomain('media', media));
-app.use(subdomain('status', utils));
+app.use(subdomain('status', catchError(utils)));
 
 // Default root route configuration
 app.get('/', (_: Request, res: Response) => {
   res.send('Hello from the main domain!');
 });
+
+app.use(errorHandler);
 
 // Starting the ExpressJS server
 app.listen(5000, () => {
