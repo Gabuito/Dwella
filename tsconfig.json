@@ -4,7 +4,6 @@
      "target": "esnext",
      "module": "nodenext",
      "erasableSyntaxOnly": true,
-     "verbatimModuleSyntax": true,
      "allowImportingTsExtensions": true,
      "moduleResolution": "nodenext",
      "pretty": true,

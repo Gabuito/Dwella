@@ -1,8 +1,8 @@
 import Express, { type Request, type Response, type Application} from 'express';
 import subdomain from 'express-subdomain';
 import { rateLimit } from 'express-rate-limit';
-import {api,utils} from './global.routes.ts';
-import { catchError, errorHandler } from './shared/middlewares/exception.middleware.ts';
+import {api,utils} from './routers/global.routes.ts';
+import { catchError, errorHandler } from './middlewares/exception.middleware.ts';
 
 // Instance of the ExpressJS application
 const app: Application = Express();
@@ -39,6 +39,7 @@ app.get('/', (_: Request, res: Response) => {
 });
 
 app.use(errorHandler);
+
 
 // Starting the ExpressJS server
 app.listen(5000, () => {
